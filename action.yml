@@ -1,6 +1,9 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'action-upload-to-s3'
+description: 'Recursively upload folder to S3 bucket'
+author: 'core3'
+branding:
+  icon: 'crosshair'  
+  color: 'blue'
 inputs:
   aws_secret_id: # change this
     required: true
