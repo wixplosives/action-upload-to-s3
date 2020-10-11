@@ -1,16 +1,16 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import {uploadFolder} from './aws'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    core.setOutput('time', new Date().toTimeString())
+    const awsSecretId: string = core.getInput('aws_secret_id')
+    const awsSecretKey: string = core.getInput('aws_secret_key')
+    const awsBucket: string = core.getInput('aws_bucket')
+    const awsSubfolder: string = core.getInput('aws_subfolder')
+    const folderToUpload: string = core.getInput('folder_to_upload')
+    core.info(`Uploaing ${folderToUpload} to ${awsBucket}/${awsSubfolder}`) 
+    await uploadFolder(awsSecretKey, awsSecretId, awsBucket , awsSubfolder, folderToUpload)
+    core.info('Done')
   } catch (error) {
     core.setFailed(error.message)
   }

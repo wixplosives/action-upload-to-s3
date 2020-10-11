@@ -2,10 +2,21 @@ name: 'Your name here'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
-  milliseconds: # change this
+  aws_secret_id: # change this
     required: true
     description: 'input description here'
-    default: 'default value if applicable'
+  aws_secret_key: # change this
+    required: true
+    description: 'input description here'
+  aws_bucket:
+    required: true
+    description: 'input description here'
+  aws_subfolder:
+    required: true
+    description: 'input description here'
+  folder_to_upload:
+    required: true
+    description: 'input description here'
 runs:
   using: 'node12'
   main: 'dist/index.js'
