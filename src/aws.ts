@@ -9,7 +9,8 @@ async function internalUploadFolder(
     secretAccessKeyPar: string,
     s3BucketName: string,
     s3subFolder: string,
-    localFolder: string
+    localFolder: string,
+    tags: string
 ) {
     AWS.config.setPromisesDependency(Promise);
     const s3 = new AWS.S3({
@@ -38,9 +39,7 @@ async function internalUploadFolder(
                 Key: relativeToBaseFilePathForS3,
                 Body: fileContent,
                 ContentType: mimeType,
-                Metadata: {
-                  'cijoe': 'True'
-                 }
+                Tagging: tags
             } as AWS.S3.PutObjectRequest)
             .promise();
 
@@ -48,10 +47,10 @@ async function internalUploadFolder(
     }
 }
 
-export async function uploadFolder(accessKeyId: string, secretAccessKey: string, awsBucket:string , s3Subfolder: string, sourceFolder: string) {   
+export async function uploadFolder(accessKeyId: string, secretAccessKey: string, awsBucket:string , s3Subfolder: string, sourceFolder: string, tags: string) {   
     const folderStats = fs.statSync(sourceFolder);
     if (!folderStats.isDirectory()) {
         throw new Error(`${sourceFolder} is not a directory.`);
     }
-    return await internalUploadFolder(accessKeyId, secretAccessKey, awsBucket, s3Subfolder, sourceFolder);
+    return await internalUploadFolder(accessKeyId, secretAccessKey, awsBucket, s3Subfolder, sourceFolder, tags);
 }

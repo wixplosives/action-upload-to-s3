@@ -20,6 +20,9 @@ inputs:
   sourceFolder:
     required: true
     description: 'sourcefolder to upload'
+  tags:
+    required: true
+    description: 'tags to set for uploaded files "Business Unit=core3&gitref=someverylongref"'
 runs:
   using: 'node12'
   main: 'dist/index.js'
