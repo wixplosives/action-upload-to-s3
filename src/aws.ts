@@ -37,7 +37,10 @@ async function internalUploadFolder(
                 Bucket: s3BucketName,
                 Key: relativeToBaseFilePathForS3,
                 Body: fileContent,
-                ContentType: mimeType
+                ContentType: mimeType,
+                Metadata: {
+                  'cijoe': 'True'
+                 }
             } as AWS.S3.PutObjectRequest)
             .promise();
 
