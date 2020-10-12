@@ -8,8 +8,16 @@ async function run(): Promise<void> {
     const awsBucket: string = core.getInput('awsBucket')
     const s3Subfolder: string = core.getInput('s3Subfolder')
     const sourceFolder: string = core.getInput('sourceFolder')
-    core.info(`Uploaing ${sourceFolder} to ${awsBucket}/${s3Subfolder}`) 
-    await uploadFolder(accessKeyId, secretAccessKey, awsBucket , s3Subfolder, sourceFolder)
+    const tags: string = core.getInput('tags')
+    core.info(`Uploaing ${sourceFolder} to ${awsBucket}/${s3Subfolder}`)
+    await uploadFolder(
+      accessKeyId,
+      secretAccessKey,
+      awsBucket,
+      s3Subfolder,
+      sourceFolder,
+      tags
+    )
     core.info('Done')
   } catch (error) {
     core.setFailed(error.message)
