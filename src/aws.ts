@@ -46,10 +46,10 @@ async function internalUploadFolder(
     }
 }
 
-export async function uploadFolder(accessKey: string, accessSecretID: string, awsBucket:string , awsSubfolder: string, folderPath: string) {   
-    const folderStats = fs.statSync(folderPath);
+export async function uploadFolder(accessKeyId: string, secretAccessKey: string, awsBucket:string , s3Subfolder: string, sourceFolder: string) {   
+    const folderStats = fs.statSync(sourceFolder);
     if (!folderStats.isDirectory()) {
-        throw new Error(`${folderPath} is not a directory.`);
+        throw new Error(`${sourceFolder} is not a directory.`);
     }
-    return await internalUploadFolder(accessKey, accessSecretID, awsBucket, awsSubfolder, folderPath);
+    return await internalUploadFolder(accessKeyId, secretAccessKey, awsBucket, s3Subfolder, sourceFolder);
 }

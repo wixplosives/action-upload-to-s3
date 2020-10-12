@@ -3,23 +3,23 @@ description: 'Recursively upload folder to S3 bucket'
 author: 'core3'
 branding:
   icon: 'crosshair'  
-  color: 'blue'
+  color: 'green'
 inputs:
-  aws_secret_id: # change this
+  accessKeyId: 
     required: true
-    description: 'input description here'
-  aws_secret_key: # change this
+    description: 'AWS Access key id (short one)'
+  secretAccessKey: 
     required: true
-    description: 'input description here'
-  aws_bucket:
+    description: 'AWS Secret access key  (long one)'
+  awsBucket:
     required: true
-    description: 'input description here'
-  aws_subfolder:
+    description: 'bucket name'
+  s3Subfolder:
     required: true
-    description: 'input description here'
-  folder_to_upload:
+    description: 'subfolder in bucket to upload data to'
+  sourceFolder:
     required: true
-    description: 'input description here'
+    description: 'sourcefolder to upload'
 runs:
   using: 'node12'
   main: 'dist/index.js'

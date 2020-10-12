@@ -42,11 +42,11 @@ In order to use this action you need bucket in aws s3 and proper credentials for
 ```yaml
 uses: wixplosives/action-upload-to-s3@v1
 with:
-  aws_secret_id: YOU_AWS_SECRET_ID
-  aws_secret_key: YOU_AWS_SECRET_KEY
-  aws_bucket: test-bucket
-  aws_subfolder: test-folder
-  folder_to_upload: my-folder
+  accessKeyId: YOUR_AWS_SECRET_ID
+  secretAccessKey: YOUR_AWS_SECRET_KEY
+  awsBucket: test-bucket
+  s3Subfolder: test-folder
+  sourceFolder: my-folder
 ```
 
 ## Usage:

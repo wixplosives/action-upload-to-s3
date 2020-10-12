@@ -3,13 +3,13 @@ import {uploadFolder} from './aws'
 
 async function run(): Promise<void> {
   try {
-    const awsSecretId: string = core.getInput('aws_secret_id')
-    const awsSecretKey: string = core.getInput('aws_secret_key')
-    const awsBucket: string = core.getInput('aws_bucket')
-    const awsSubfolder: string = core.getInput('aws_subfolder')
-    const folderToUpload: string = core.getInput('folder_to_upload')
-    core.info(`Uploaing ${folderToUpload} to ${awsBucket}/${awsSubfolder}`) 
-    await uploadFolder(awsSecretKey, awsSecretId, awsBucket , awsSubfolder, folderToUpload)
+    const accessKeyId: string = core.getInput('accessKeyId')
+    const secretAccessKey: string = core.getInput('secretAccessKey')
+    const awsBucket: string = core.getInput('awsBucket')
+    const s3Subfolder: string = core.getInput('s3Subfolder')
+    const sourceFolder: string = core.getInput('sourceFolder')
+    core.info(`Uploaing ${sourceFolder} to ${awsBucket}/${s3Subfolder}`) 
+    await uploadFolder(accessKeyId, secretAccessKey, awsBucket , s3Subfolder, sourceFolder)
     core.info('Done')
   } catch (error) {
     core.setFailed(error.message)
