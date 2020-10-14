@@ -35,6 +35,7 @@ async function internalUploadFolder(
         // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
         await s3
             .putObject({
+                ACL: `public-read`,
                 Bucket: s3BucketName,
                 Key: relativeToBaseFilePathForS3,
                 Body: fileContent,
