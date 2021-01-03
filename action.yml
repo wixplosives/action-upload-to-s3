@@ -23,6 +23,12 @@ inputs:
   tags:
     required: true
     description: 'tags to set for uploaded files "Business Unit=core3&gitref=someverylongref"'
+  pulishAsLatest: 
+    required: false
+    description: 'true or false. If true https://bo.wix.com/core3-proxy/<publishAsProject>/index.html will redirect to <s3Subfolder> folder.'
+  publishAsProject:
+    required: false
+    description: 'only if pulishAsLatest is true. Name of the virtual project to create latest link'
 runs:
   using: 'node12'
   main: 'dist/index.js'
