@@ -47,6 +47,7 @@ with:
   awsBucket: test-bucket
   s3Subfolder: test-folder
   sourceFolder: my-folder
+  publishAsVirtualProject: bestproject
 ```
 
 ## Usage:

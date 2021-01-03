@@ -9,12 +9,11 @@ async function run(): Promise<void> {
     const s3Subfolder: string = core.getInput('s3Subfolder')
     const sourceFolder: string = core.getInput('sourceFolder')
     const tags: string = core.getInput('tags')
-    const publishAsLatest: string = core.getInput('pulishAsLatest')
-    const publishAsProject: string = core.getInput('publishAsProject')
+    const publishAsProject: string = core.getInput('publishAsVirtualProject')
     core.info(`Uploading ${sourceFolder} to ${awsBucket}/${s3Subfolder}`)
     const s3Client = new AWSS3Client(accessKeyId, secretAccessKey)
     await s3Client.uploadFolder(awsBucket, s3Subfolder, sourceFolder, tags)
-    if (publishAsLatest === 'true') {
+    if (publishAsProject && publishAsProject !== '') {
       await s3Client.updateLatest(awsBucket, s3Subfolder, publishAsProject)
     }
     core.info('Done')
