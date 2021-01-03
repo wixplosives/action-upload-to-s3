@@ -15,6 +15,9 @@ async function run(): Promise<void> {
     await s3Client.uploadFolder(awsBucket, s3Subfolder, sourceFolder, tags)
     if (publishAsProject && publishAsProject !== '') {
       await s3Client.updateLatest(awsBucket, s3Subfolder, publishAsProject)
+      core.info(
+        `Create static link ${awsBucket}/${publishAsProject} for ${awsBucket}/${s3Subfolder}`
+      )
     }
     core.info('Done')
   } catch (error) {
