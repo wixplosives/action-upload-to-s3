@@ -16,15 +16,21 @@ async function run(): Promise<void> {
     await s3Client.uploadFolder(awsBucket, s3Subfolder, sourceFolder, tags)
     if (publishAsProject && publishAsProject !== '') {
       if (specificFile !== '') {
-        await s3Client.updateLatestWithSpecificFile(awsBucket, s3Subfolder, publishAsProject, specificFile)
+        await s3Client.updateLatestWithSpecificFile(
+          awsBucket,
+          s3Subfolder,
+          publishAsProject,
+          specificFile
+        )
         core.info(
           `Create static link ${awsBucket}/${publishAsProject} for ${awsBucket}/${s3Subfolder}/${specificFile}`
         )
+      } else {
+        await s3Client.updateLatest(awsBucket, s3Subfolder, publishAsProject)
+        core.info(
+          `Create static link ${awsBucket}/${publishAsProject} for ${awsBucket}/${s3Subfolder}`
+        )
       }
-      await s3Client.updateLatest(awsBucket, s3Subfolder, publishAsProject)
-      core.info(
-        `Create static link ${awsBucket}/${publishAsProject} for ${awsBucket}/${s3Subfolder}`
-      )
     }
     core.info('Done')
   } catch (error) {
