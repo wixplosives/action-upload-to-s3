@@ -26,6 +26,9 @@ inputs:
   publishAsVirtualProject:
     required: false
     description: ' Name of the virtual project to create link.Usefull for creating latest version links.'
+  specificFile:
+    required: false
+    description: 'file in s3Subfolder to upload'
 runs:
   using: 'node12'
   main: 'dist/index.js'
