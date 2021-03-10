@@ -95,4 +95,23 @@ export class AWSS3Client {
       } as AWS.S3.PutObjectRequest)
       .promise()
   }
+
+  async updateLatestWithSpecificFile(
+    s3BucketName: string,
+    targetSubfolder: string,
+    projectName: string,
+    specificFile: string
+  ): Promise<void> {
+    const linkText = `<meta http-equiv="refresh" content="0; URL=https://bo.wix.com/core3-proxy/${targetSubfolder}/${specificFile}"/>`
+    const targetPath = `${projectName}/index.html`
+    await this.s3Client
+      .putObject({
+        Bucket: s3BucketName,
+        Key: targetPath,
+        Body: linkText,
+        ContentType: 'text/html;charset=UTF-8',
+        Tagging: 'Buisness Unit=core3'
+      } as AWS.S3.PutObjectRequest)
+      .promise()
+  }
 }
