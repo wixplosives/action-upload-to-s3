@@ -37,15 +37,12 @@ export class AWSS3Client {
       const relativeToBaseFilePath = path.normalize(
         path.relative(localFolder, filePath)
       )
-      let relativeToBaseFilePathForS3 = relativeToBaseFilePath
-        .split(path.sep)
-        .join('/')
-      relativeToBaseFilePathForS3 = path.join(
+      // re-convert to posix path after the normalization
+      let relativeToBaseFilePathForS3 = slash(relativeToBaseFilePath)
+      relativeToBaseFilePathForS3 = path.posix.join(
         s3subFolder,
         relativeToBaseFilePathForS3
       )
-      relativeToBaseFilePathForS3 = slash(relativeToBaseFilePathForS3)
-      core.info(`TEST`)
       const mimeType = mime.getType(filePath)
       core.info(`Uploading ${statistics}, ${relativeToBaseFilePathForS3}`)
       // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
