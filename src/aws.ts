@@ -4,6 +4,7 @@ import fs from 'fs'
 import glob from 'glob'
 import AWS from 'aws-sdk'
 import mime from 'mime'
+import slash from 'slash'
 
 export class AWSS3Client {
   s3Client: AWS.S3
@@ -43,6 +44,8 @@ export class AWSS3Client {
         s3subFolder,
         relativeToBaseFilePathForS3
       )
+      relativeToBaseFilePathForS3 = slash(relativeToBaseFilePathForS3)
+      core.info(`TEST`)
       const mimeType = mime.getType(filePath)
       core.info(`Uploading ${statistics}, ${relativeToBaseFilePathForS3}`)
       // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
