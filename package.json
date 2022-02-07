@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
+  "name": "action-upload-to-s3",
+  "version": "0.0.1",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Upload files to s3",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
