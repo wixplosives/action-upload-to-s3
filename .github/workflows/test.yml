@@ -28,7 +28,7 @@ jobs:
         with:
           accessKeyId: ${{ secrets.AWS_KEY_ID }}
           secretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          awsBucket: ${{ secrets.AWS_BUCKET }}
+          awsBucket: core3.static.releases
           s3Subfolder: test-uploads
           sourceFolder: '__tests__/fixtures/folder_to_upload'
           tags: 'Business Unit=core3&gitref=${{github.ref}}'
