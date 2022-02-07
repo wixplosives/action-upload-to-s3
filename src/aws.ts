@@ -1,9 +1,10 @@
 import * as core from '@actions/core'
-import path from 'path'
+import AWS from 'aws-sdk'
 import fs from 'fs'
 import glob from 'glob'
-import AWS from 'aws-sdk'
 import mime from 'mime'
+import path from 'path'
+import slash from 'slash'
 
 export class AWSS3Client {
   s3Client: AWS.S3
@@ -36,10 +37,9 @@ export class AWSS3Client {
       const relativeToBaseFilePath = path.normalize(
         path.relative(localFolder, filePath)
       )
-      let relativeToBaseFilePathForS3 = relativeToBaseFilePath
-        .split(path.sep)
-        .join('/')
-      relativeToBaseFilePathForS3 = path.join(
+      // re-convert to posix path after the normalization
+      let relativeToBaseFilePathForS3 = slash(relativeToBaseFilePath)
+      relativeToBaseFilePathForS3 = path.posix.join(
         s3subFolder,
         relativeToBaseFilePathForS3
       )

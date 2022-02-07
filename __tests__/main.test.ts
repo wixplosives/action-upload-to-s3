@@ -6,5 +6,3 @@ test('throws invalid number', async () => {
   const input = 10
   expect(input).toBe(10)
 })
-
-
