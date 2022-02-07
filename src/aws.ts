@@ -1,9 +1,9 @@
 import * as core from '@actions/core'
-import path from 'path'
+import AWS from 'aws-sdk'
 import fs from 'fs'
 import glob from 'glob'
-import AWS from 'aws-sdk'
 import mime from 'mime'
+import path from 'path'
 import slash from 'slash'
 
 export class AWSS3Client {

@@ -12,13 +12,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          npm install
+          npm ci
       - run: |
           npm run all
   test: # make sure the action works on a clean machine without building
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [14,16]
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - name: upload-folder
+        uses: ./        
         with:
-          milliseconds: 1000
+          accessKeyId: ${{ secrets.AWS_KEY_ID }}
+          secretAccessKey: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          awsBucket: core3.static.releases
+          s3Subfolder: test-uploads
+          sourceFolder: '__tests__/fixtures/folder_to_upload'
+          tags: 'Business Unit=core3&gitref=${{github.ref}}'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
